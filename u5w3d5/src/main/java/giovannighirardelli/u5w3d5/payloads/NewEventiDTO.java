@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record NewEventiDTO(
         @NotEmpty(message = "Il titolo dell'evento è obbligatorio per la creazione")
@@ -15,7 +16,8 @@ public record NewEventiDTO(
         LocalDate data,
         @NotNull(message = "L'evento deve avere un numero massimo di partecipanti per la creazione")
         int maxPartecipanti,
-        @NotNull(message = "Il creatore dell'evento è obbligatorio per la creazione")
-        Utenti utenti
+        @NotEmpty(message = "L'evento deve avere una location")
+        String location,
+        UUID utenteId
 ) {
 }

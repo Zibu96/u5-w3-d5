@@ -11,7 +11,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class Eventi {
     @Id
@@ -27,4 +26,13 @@ public class Eventi {
     @ManyToOne
     @JoinColumn(name = "creato_da")
     private Utenti utenti;
+
+    public Eventi(String titolo, String descrizione, LocalDate data, int maxPartecipanti, String location, Utenti utenti) {
+        this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.data = data;
+        this.maxPartecipanti = maxPartecipanti;
+        this.location = location;
+        this.utenti = utenti;
+    }
 }
