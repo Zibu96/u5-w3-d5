@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/eventi")
 public class EventiController {
@@ -36,5 +38,19 @@ public class EventiController {
             throw new BadRequestException(validationResult.getAllErrors());
         }
         return  this.eventiService.saveEventi(body);
+    }
+
+    @PutMapping("/{dipendentiId}")
+    @PreAuthorize("hasAuthority('ORGANIZZATORE')")
+    public Eventi findByIdAndUpdate(@PathVariable UUID dipendentiId, @RequestBody Eventi body){
+        return this.eventiService.findByIdAndUpdate(dipendentiId, body);
+
+    }
+
+    @DeleteMapping("/{eventiId}")
+    @PreAuthorize("hasAuthority('ORGANIZZATORE')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void findByIdAndDelete(@PathVariable UUID eventiId) {
+        this.eventiService.findByIdAndDelete(eventiId);
     }
 }

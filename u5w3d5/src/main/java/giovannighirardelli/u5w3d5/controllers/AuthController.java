@@ -34,7 +34,7 @@ public class AuthController {
             System.out.println(validationResult.getAllErrors());
             throw new BadRequestException(validationResult.getAllErrors());
         }
-
+        System.out.println(body);
         return new NewUtentiResponseDTO(this.utentiService.saveUtenti(body).getId());
     }
 }

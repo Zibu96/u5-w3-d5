@@ -48,10 +48,7 @@ public class Utenti implements UserDetails {
         return List.of(new SimpleGrantedAuthority(this.ruoliUtente.name()));
     }
 
-    @Override
-    public String getUsername() {
-        return "";
-    }
+
 
 
     @Override
