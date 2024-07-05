@@ -18,7 +18,9 @@ public record NewUtentiDTO(
         String email,
         @NotEmpty(message = "La password è obbligatoria per la creazione di un utente")
         @Size(min = 8, max = 20, message = "La password deve avere minimo 8 caratteri e massimo 20")
-        String password
+        String password,
+        @NotEmpty(message = "Il ruolo dell'utente è obbligatorio per la creazione")
+        String ruolo
 
 ) {
 }

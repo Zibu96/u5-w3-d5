@@ -37,7 +37,7 @@ public class UtentiService {
         });
 
 
-        Utenti dipendenti = new Utenti(body.nome(), body.cognome(), body.username(), body.email(), bCrypt.encode(body.password()), RuoliUtente.USER);
+        Utenti dipendenti = new Utenti(body.nome(), body.cognome(), body.username(), body.email(), bCrypt.encode(body.password()), convertStringToRuoliUtente(body.ruolo()));
 
 
         return this.utentiRepository.save(dipendenti);
@@ -48,5 +48,17 @@ public class UtentiService {
     public Utenti findById(UUID id) {
         return this.utentiRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
 }
+
+    public Utenti findByEmail(String email){
+        return utentiRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("Utente con email " + email + " non trovato!"));
+    }
+
+    private static RuoliUtente convertStringToRuoliUtente (String ruoli){
+        try{
+            return RuoliUtente.valueOf(ruoli.toUpperCase());
+        }catch (IllegalArgumentException e) {
+            throw new BadRequestException("Il ruolo indicato non è corretto");
+        }
+    }
 }
 
